@@ -1,34 +1,34 @@
 var medications = {
-	"Bicaridine":15,
-	"Dexalin Plus":10,
-	"Saline":4,
-	"Dermaline":10,
-	"Arithrazine":22,
-	"Dylovene":10,
-	"Bruizine":30,
-	"Puncturase":30,
-	"Lacerinol":30,
-	"Leporazine":26,
-	"Pyrazine":35,
-	"Insuzine":36,
-	"Sigynate":50,
-	"Siderlac":75,
-	"Phalanximine":60,
-	"Oculine":40,
-	"Tricordrazine":12,
-	"Omnizine":100,
-	"Cryoxadone":50,
-	"Aloxadone":60,
-	"Stelloxadone":80
+	"Bicaridine":150,
+	"Dexalin Plus":100,
+	"Saline":40,
+	"Dermaline":100,
+	"Arithrazine":220,
+	"Dylovene":100,
+	"Bruizine":300,
+	"Puncturase":300,
+	"Lacerinol":300,
+	"Leporazine":260,
+	"Pyrazine":350,
+	"Insuzine":360,
+	"Sigynate":500,
+	"Siderlac":750,
+	"Phalanximine":600,
+	"Oculine":400,
+	"Tricordrazine":120,
+	"Omnizine":1000,
+	"Cryoxadone":500,
+	"Aloxadone":600,
+	"Stelloxadone":800
 } // per u
 
 var topicals = {
-	"Gauze":5,
-	"Blood Pack":8,
-	"Bruise Pack":20,
-	"Ointment":20,
-	"Medicated Suture":50,
-	"Regenerative Mesh":50
+	"Gauze":500,
+	"Blood Pack":500,
+	"Bruise Pack":1700,
+	"Ointment":1700,
+	"Medicated Suture":4000,
+	"Regenerative Mesh":3500
 } // per unit
 
 /*var medipens = {
