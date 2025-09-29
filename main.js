@@ -30,6 +30,15 @@ var topicals = {
 	"Regenerative Mesh":50
 } // per unit
 
+/*var medipens = {
+	"Emergency Medipen":{
+		"Tranexamic Acid":20
+	},
+}*/
+
+var med_amount_limit = 6
+var topical_amount_limit = 5
+
 var med_keys = Object.keys(medications)
 var medications_section = document.getElementById("medications_section"); 
 var price_settings_section = document.getElementById("pricesettings"); 
@@ -43,6 +52,21 @@ for(let i=0;i < med_keys.length;i++){
 	}
 	medications_section.appendChild(this_very_medication)
 	
+	
+	for(let r=1;r<(med_amount_limit + 1);r++){
+		var radio_element = document.createElement("input")
+		radio_element.type = "radio"
+		radio_element.name = med_keys[i]
+		radio_element.id = med_keys[i] + (5 * r) + "u"
+		this_very_medication.appendChild(radio_element)
+		
+		var radio_label = document.createElement("label")
+		radio_label.innerHTML = (5 * r) + "u"
+		radio_label.setAttribute("for", med_keys[i] + (5 * r) + "u")
+		this_very_medication.appendChild(radio_label)
+	}
+	
+	/*
 	var radio5u = document.createElement("input")
 	radio5u.type = "radio"
 	radio5u.name = med_keys[i]
@@ -89,7 +113,7 @@ for(let i=0;i < med_keys.length;i++){
 	radio20ulabel.innerHTML = "20u"
 	radio20ulabel.setAttribute("for", med_keys[i] + "20u")
 	this_very_medication.appendChild(radio20ulabel)
-
+	*/
 
 	this_very_medication.innerHTML += "........"
 
@@ -125,6 +149,40 @@ for(let i=0;i < med_keys.length;i++){
 	
 }
 
+medications_section.appendChild(document.createElement("hr"))
+medications_section.innerHTML += `<div>Number is per pack (usually a stack of 10), not per unit used</div>`
+
+var topical_keys = Object.keys(topicals)
+for(let i=0;i<topical_keys.length;i++){
+	var topical_container = document.createElement("div")
+	if(i%2==0){
+		topical_container.classList.add("every_other_line")
+	}
+	
+	for(let r=1;r<(topical_amount_limit + 1);r++){
+		var radio_element = document.createElement("input")
+		radio_element.type = "radio"
+		radio_element.name = topical_keys[i]
+		radio_element.id = topical_keys[i] + r
+		topical_container.appendChild(radio_element)
+		
+		var radio_label = document.createElement("label")
+		radio_label.innerHTML = r
+		radio_label.setAttribute("for", topical_keys[i] + r)
+		topical_container.appendChild(radio_label)
+	}
+	
+	topical_container.innerHTML += "........"
+
+	var label = document.createElement("label")
+	label.innerHTML = topical_keys[i]
+	label.for = topical_keys[i]
+	topical_container.appendChild(label)
+	
+	medications_section.appendChild(topical_container)
+	
+}
+
 function spaces(number){
 	var output = ""
 	for(let i = 0; i < number;i++){
@@ -137,33 +195,54 @@ function submitForm() {
 	const form = document.getElementById('genform')
 	const drfield = form.elements['drname']
 	const ptfield = form.elements['ptname']
+	const iff = form.elements['vesselIFF']
 	const spacetaxpercent = form.elements['spacetax']
 	const stampsection = form.elements['stampsection']
 	const frontiermode = form.elements['frontiermode']
+	const revivalfee = form.elements['revivalfee']
 	const copyalso = form.elements['copyalso']
 
 	const output = document.getElementById("output"); 
 	
 	var meds = {}
+	var tops = {}
 	var subtotal = 0
 	
 	for(let i=0;i < med_keys.length;i++){
 		var medication_name = med_keys[i]
 		var radioButtons = form.elements[medication_name]
 		if(radioButtons.value == "on"){
-			if(radioButtons[0].checked) {
-				meds[medication_name] = 5
-			} else if(radioButtons[1].checked) {
-				meds[medication_name] = 10
-			} else if(radioButtons[2].checked) {
-				meds[medication_name] = 15
-			} else {
-				meds[medication_name] = 20
+			
+			meds[medication_name] = 5
+			for(let j=0;j < radioButtons.length;j++){
+				if(radioButtons[j].checked) {
+					meds[medication_name] = 5 + (5 * j)
+				}
 			}
+
 			subtotal += (meds[medication_name] * medications[medication_name])
 		}
 	}
-	if(Object.keys(meds).length == 0){
+	for(let i=0;i<topical_keys.length;i++){
+		var topical_name = topical_keys[i]
+		var radioButtons = form.elements[topical_name]
+		
+		if(radioButtons.value == "on"){
+			
+			tops[topical_name] = 1
+			for(let j=0;j < radioButtons.length;j++){
+				if(radioButtons[j].checked) {
+					tops[topical_name] = 1 + j
+				}
+			}
+
+			subtotal += (tops[topical_name] * topicals[topical_name] * 10)
+		}
+	}
+	
+	
+	
+	if(Object.keys(meds).length == 0 && Object.keys(tops).length == 0){
 		return
 	}
 	
@@ -185,10 +264,14 @@ function submitForm() {
 	}
 	var doctor_name = drfield.value
 	var patient_name = ptfield.value
+	var iff_name = iff.value
 	if(doctor_name == ""){doctor_name = "Imogen Hanford"}
 	if(patient_name == ""){patient_name = " NAME"}
 	output.innerHTML += "\nDoctor: [color=#002AAF]" + doctor_name + "[/color]"
 	output.innerHTML += "\nPatient: [color=#002AAF]" + patient_name + "[/color]"
+	if(frontiermode.checked && !iff_name == ""){
+		output.innerHTML += "\nVessel: [color=#002AAF]" + iff_name + "[/color]"
+	}
 
 	
 	output.innerHTML += `\n──────────────────────────────────────────
@@ -205,6 +288,17 @@ function submitForm() {
 		
 		output.innerHTML += description + spaces(spaces_needed) + charge + "\n"
 	}
+	
+	var tops_keys = Object.keys(tops)
+	for(let i=0;i<tops_keys.length;i++){
+		var medication = tops_keys[i]
+		var description = tops[medication] + " " + medication.toUpperCase()
+		var charge = (tops[medication] * topicals[medication]).toFixed(2)
+		
+		var spaces_needed = spaceAmount - description.length - charge.length
+		
+		output.innerHTML += description + spaces(spaces_needed) + charge + "\n"
+	}
 
 	var spaces_needed = spaceAmount - 8 - (subtotal.toFixed(2)).length
 		
@@ -212,8 +306,17 @@ function submitForm() {
 	
 	var total = 0
 	
+	if(revivalfee.value > 0){
+		var revival_fee = Number(revivalfee.value)
+		
+		var spaces_needed = spaceAmount - 13 - revival_fee.toFixed(2).length
+		output.innerHTML += `Revival Fee: ` + spaces(spaces_needed) + revival_fee.toFixed(2) + "\n"
+		subtotal += revival_fee
+		
+	}
+	
 	if(spacetaxpercent.value > 0){
-		output.innerHTML += "Space Tax (" + spacetaxpercent.value + "%)"
+		output.innerHTML += `Space Tax (` + spacetaxpercent.value + `%)`
 		subtotal = Math.ceil(subtotal + subtotal * (spacetaxpercent.value / 100))
 		total = subtotal.toFixed(2) + " SPESOS"
 	} else {
@@ -241,11 +344,18 @@ function submitForm() {
 	for(let i=0;i < med_keys.length;i++){
 		var medication_name = med_keys[i]
 		var radioButtons = form.elements[medication_name]
-		radioButtons[0].checked = false
-		radioButtons[1].checked = false
-		radioButtons[2].checked = false
-		radioButtons[3].checked = false
+		for(let j=0;j < radioButtons.length;j++){
+			radioButtons[j].checked = false
+		}
 	}
+	for(let i=0;i < tops_keys.length;i++){
+		var medication_name = tops_keys[i]
+		var radioButtons = form.elements[medication_name]
+		for(let j=0;j < radioButtons.length;j++){
+			radioButtons[j].checked = false
+		}
+	}
+	
 	ptfield.value = ""
 	
 }
