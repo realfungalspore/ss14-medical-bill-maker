@@ -1,7 +1,7 @@
 var medications = {
 	"Bicaridine":15,
 	"Dexalin Plus":10,
-	"Saline":5,
+	"Saline":4,
 	"Dermaline":10,
 	"Arithrazine":22,
 	"Dylovene":10,
@@ -18,7 +18,7 @@ var medications = {
 	"Tricordrazine":12,
 	"Omnizine":100,
 	"Ambuzol":20,
-	"Ambuzol Plus":125
+	"Ambuzol Plus":120
 } // per u
 
 var topicals = {
