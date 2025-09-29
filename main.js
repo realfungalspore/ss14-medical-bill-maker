@@ -25,7 +25,7 @@ var med_keys = Object.keys(medications)
 var medications_section = document.getElementById("medications_section"); 
 for(let i=0;i < med_keys.length;i++){
 	
-	//worst written code of all time but it's ok because i'm self aware
+	// could be done a different way :)
 	
 	var this_very_medication = document.createElement("div")
 	if(i%2==0){
