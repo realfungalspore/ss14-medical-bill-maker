@@ -1,4 +1,4 @@
-const medications = {
+var medications = {
 	"Bicaridine":15,
 	"Dexalin Plus":10,
 	"Saline":5,
@@ -23,6 +23,7 @@ const medications = {
 
 var med_keys = Object.keys(medications)
 var medications_section = document.getElementById("medications_section"); 
+var price_settings_section = document.getElementById("pricesettings"); 
 for(let i=0;i < med_keys.length;i++){
 	
 	// could be done a different way :)
@@ -89,6 +90,34 @@ for(let i=0;i < med_keys.length;i++){
 	this_very_medication.appendChild(label)
 	
 	//medications_section.innerHTML += "<br>"
+	
+	// price settings section
+	
+	var setting_div = document.createElement("div")
+	
+	var setting_textbox = document.createElement("input")
+	setting_textbox.type = "number"
+	setting_textbox.size = "4"
+	setting_textbox.med = med_keys[i]
+	setting_textbox.value = medications[med_keys[i]] * 5
+	setting_div.appendChild(setting_textbox)
+	
+	setting_textbox.addEventListener("input",(event) => {
+		console.log(event)
+		medications[event.target.med] = (event.target.value / 5)
+	})
+	
+	var label = document.createElement("label")
+	label.innerHTML = " " + med_keys[i]
+	setting_div.appendChild(label)
+	
+
+	price_settings_section.appendChild(setting_div)
+	
+}
+
+function price_change(medication) {
+	console.log(medication)
 }
 
 function spaces(number){
