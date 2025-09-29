@@ -293,7 +293,7 @@ function submitForm() {
 	var tops_keys = Object.keys(tops)
 	for(let i=0;i<tops_keys.length;i++){
 		var medication = tops_keys[i]
-		var description = tops[medication] + " " + medication.toUpperCase()
+		var description = tops[medication] + " STACK " + medication.toUpperCase()
 		var charge = (tops[medication] * topicals[medication]).toFixed(2)
 		
 		var spaces_needed = spaceAmount - description.length - charge.length
