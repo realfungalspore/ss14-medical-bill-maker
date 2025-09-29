@@ -21,6 +21,15 @@ var medications = {
 	"Ambuzol Plus":125
 } // per u
 
+var topicals = {
+	"Gauze":5,
+	"Blood Pack":8,
+	"Bruise Pack":20,
+	"Ointment":20,
+	"Medicated Suture":50,
+	"Regenerative Mesh":50
+} // per unit
+
 var med_keys = Object.keys(medications)
 var medications_section = document.getElementById("medications_section"); 
 var price_settings_section = document.getElementById("pricesettings"); 
@@ -134,6 +143,7 @@ function submitForm() {
 	const ptfield = form.elements['ptname']
 	const spacetaxpercent = form.elements['spacetax']
 	const stampsection = form.elements['stampsection']
+	const frontiermode = form.elements['frontiermode']
 	const copyalso = form.elements['copyalso']
 
 	const output = document.getElementById("output"); 
@@ -165,11 +175,19 @@ function submitForm() {
 	
 	
 	output.innerHTML = ""
-	output.innerHTML += `[color=white]░░░[/color][color=#5b97bc]██[/color][color=white]░░░[/color]    [head=3]Nanotrasen Medical Department [/head]
-[color=white]░[/color][color=#5b97bc]▐████▌[/color][color=white]░[/color]                      [color=#5b97bc][bold]Medical Invoice[/bold][/color]
-[color=white]░░░[/color][color=#5b97bc]██[/color][color=white]░░░[/color]                                                       [color=#aaa]Document MD-INV[/color]
-──────────────────────────────────────────
-Thank you for choosing Nanotrasen's medical department for your healthcare needs. The below is a summary regarding the charges you owe for your care.\n`
+	if(!frontiermode.checked){
+		output.innerHTML += `[color=white]░░░[/color][color=#5b97bc]██[/color][color=white]░░░[/color]    [head=3]Nanotrasen Medical Department [/head]
+	[color=white]░[/color][color=#5b97bc]▐████▌[/color][color=white]░[/color]                      [color=#5b97bc][bold]Medical Invoice[/bold][/color]
+	[color=white]░░░[/color][color=#5b97bc]██[/color][color=white]░░░[/color]                                                       [color=#aaa]Document MD-INV[/color]
+	──────────────────────────────────────────
+	Thank you for choosing Nanotrasen's medical department for your healthcare needs. The below is a summary regarding the charges you owe for your care.\n`
+	} else {
+		output.innerHTML += `[color=white]░░░[/color][color=#5b97bc]██[/color][color=white]░░░[/color]    [head=3]Frontier Medical Services [/head]
+	[color=white]░[/color][color=#5b97bc]▐████▌[/color][color=white]░[/color]                      [color=#5b97bc][bold]Medical Invoice[/bold][/color]
+	[color=white]░░░[/color][color=#5b97bc]██[/color][color=white]░░░[/color]                                                       [color=#aaa]Document MD-INV[/color]
+	──────────────────────────────────────────
+	Thank you for choosing our exclusive premium medical services for your healthcare needs. The below is a summary regarding the charges you owe for your care.\n`
+	}
 	var doctor_name = drfield.value
 	var patient_name = ptfield.value
 	if(doctor_name == ""){doctor_name = "Imogen Hanford"}
@@ -212,7 +230,7 @@ Thank you for choosing Nanotrasen's medical department for your healthcare needs
 	output.innerHTML += `\nTOTAL OWED` + spaces(spaces_needed) + total + "\n"
 	
 	
-	output.innerHTML += "[/mono]\n\nPlease pay at your earliest convenience."
+	output.innerHTML += `[/mono]\n\nPlease pay at your earliest convenience.`
 
 	if(stampsection.checked){
 		output.innerHTML += `\n\n                 [italic]STAMP BELOW     STAMP BELOW     STAMP BELOW[/italic]  
