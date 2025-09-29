@@ -1,25 +1,25 @@
 var medications = {
-	"Bicaridine":150,
-	"Dexalin Plus":100,
-	"Saline":40,
-	"Dermaline":100,
-	"Arithrazine":220,
-	"Dylovene":100,
-	"Bruizine":300,
-	"Puncturase":300,
-	"Lacerinol":300,
-	"Leporazine":260,
-	"Pyrazine":350,
-	"Insuzine":360,
-	"Sigynate":500,
-	"Siderlac":750,
-	"Phalanximine":600,
-	"Oculine":400,
-	"Tricordrazine":120,
-	"Omnizine":1000,
-	"Cryoxadone":500,
-	"Aloxadone":600,
-	"Stelloxadone":800
+	"Bicaridine":75,
+	"Dexalin Plus":50,
+	"Saline":20,
+	"Dermaline":50,
+	"Arithrazine":110,
+	"Dylovene":50,
+	"Bruizine":150,
+	"Puncturase":150,
+	"Lacerinol":150,
+	"Leporazine":130,
+	"Pyrazine":175,
+	"Insuzine":180,
+	"Sigynate":250,
+	"Siderlac":375,
+	"Phalanximine":300,
+	"Oculine":200,
+	"Tricordrazine":60,
+	"Omnizine":700,
+	"Cryoxadone":300,
+	"Aloxadone":500,
+	"Stelloxadone":600
 } // per u
 
 var topicals = {
@@ -237,7 +237,7 @@ function submitForm() {
 				}
 			}
 
-			subtotal += (tops[topical_name] * topicals[topical_name] * 10)
+			subtotal += (tops[topical_name] * topicals[topical_name])
 		}
 	}
 	
