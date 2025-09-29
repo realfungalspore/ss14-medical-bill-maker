@@ -163,7 +163,6 @@ function submitForm() {
 			subtotal += (meds[medication_name] * medications[medication_name])
 		}
 	}
-	console.log(meds)
 	if(Object.keys(meds).length == 0){
 		return
 	}
