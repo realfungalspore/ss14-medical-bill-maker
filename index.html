@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<form id="genform">
+	<fieldset>
+		<legend>
+			<h1 style="font-size:150%">Station Healthcare Expenses</h1>
+		</legend>
+		<label for="drname">Doctor Name:</label><br>
+		<input type="text" id="drname" placeholder="Imogen Hanford"><br>
+		<label for="ptname">Patient Name:</label><br>
+		<input type="text" id="ptname" placeholder="Shocks-the-System"><br>
+			<hr>
+		<div id="medications_section"></div>
+			<hr>
+		
+		<label for="spacetax">Space Tax:</label><br>
+		<input type="number" id="spacetax" value="8.5" maxlength="3" size="4"> %<br>
+		
+		<label for="stampsection">Add stamp section:</label>
+		<input type="checkbox" id="stampsection">
+		
+			<br><br>
+		<input type="button" value="Submit" onclick="submitForm()"><br>
+		<label for="copyalso">Also copy to clipboard:</label>
+		<input type="checkbox" id="copyalso" checked>
+		
+
+		
+	</fieldset>
+</form>
+
+<textarea id="output" name="output" rows="40" cols="100"></textarea>
+<style>
+	* {
+		font-size:105%;
+		background-color:#efefef;
+	}
+	.every_other_line {
+		color:#000487;
+	}
+	input[type=radio] {
+		border: 0px;
+		height: 0.75em;
+		width:1em
+	}
+	
+	
+</style>
+<script src="main.js"></script>
+</html>
