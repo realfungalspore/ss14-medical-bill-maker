@@ -125,10 +125,6 @@ for(let i=0;i < med_keys.length;i++){
 	
 }
 
-function price_change(medication) {
-	console.log(medication)
-}
-
 function spaces(number){
 	var output = ""
 	for(let i = 0; i < number;i++){
@@ -198,7 +194,7 @@ function submitForm() {
 	
 	output.innerHTML += `\n──────────────────────────────────────────
 [mono][bold]DESCRIPTION                                              AMOUNT[/bold]\n`
-	//33 characters from start to the chr before "AMOUNT"
+	//36 characters from start to the chr before "AMOUNT"
 	var spaceAmount = 36
 	var meds_keys = Object.keys(meds)
 	for(let i=0;i<meds_keys.length;i++){
