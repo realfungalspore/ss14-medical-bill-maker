@@ -17,7 +17,7 @@ var medications = {
 	"Oculine":40,
 	"Tricordrazine":12,
 	"Omnizine":100,
-	"Cryoxadone":15,
+	"Cryoxadone":50,
 	"Aloxadone":60,
 	"Stelloxadone":80
 } // per u
