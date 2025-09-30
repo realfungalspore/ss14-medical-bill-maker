@@ -333,8 +333,13 @@ function submitForm() {
 	output.innerHTML += `[/mono]\n\nPlease pay at your earliest convenience.`
 
 	if(stampsection.checked){
-		output.innerHTML += `\n\n                 [italic]STAMP BELOW     STAMP BELOW     STAMP BELOW[/italic]  
-──────────────────────────────────────────`
+		if(frontiermode.checked){
+			output.innerHTML += `\n\n                 [italic]SIGN BELOW     SIGN BELOW     SIGN BELOW[/italic]  
+	──────────────────────────────────────────`
+		} else {
+			output.innerHTML += `\n\n                 [italic]STAMP BELOW     STAMP BELOW     STAMP BELOW[/italic]  
+	──────────────────────────────────────────`
+		}
 	}
 	
 	if(copyalso.checked){
