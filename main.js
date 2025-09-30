@@ -1,5 +1,6 @@
 var medications = {
 	"Bicaridine":75,
+	"Dexalin":25,
 	"Dexalin Plus":50,
 	"Saline":20,
 	"Dermaline":50,
